@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "236643452821",
+    "firebase_url": "https://nailscheduler-9f227.firebaseio.com",
+    "project_id": "nailscheduler-9f227",
+    "storage_bucket": "nailscheduler-9f227.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236643452821:android:0a2e0b8b40c2e065f3d89c",
+        "android_client_info": {
+          "package_name": "com.example.nailscheduler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236643452821-b5ph53ng8qpukuc4f0on457u2djqcgn2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC3jZxE287ttW1tAMKwRPbwdPYuWj2C1g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236643452821-b5ph53ng8qpukuc4f0on457u2djqcgn2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
