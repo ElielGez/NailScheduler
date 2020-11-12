@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@drawable/loginbackground"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="26dp"
+    >
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:text="NailScheduler"
+        android:textSize="38sp" />
+
+    <RadioGroup
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        >
+
+        <RadioButton
+            android:id="@+id/type_owner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/type_owner"
+            android:onClick="onRadioButtonClicked" />
+
+        <RadioButton
+            android:id="@+id/type_client"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/type_client"
+            android:onClick="onRadioButtonClicked" />
+    </RadioGroup>
+
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:hint="@string/Email"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:textSize="22sp" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:hint="@string/password"
+        android:imeOptions="actionDone"
+        android:textSize="22sp"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="140dp"
+        android:layout_height="56dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="@string/button_signIn"
+        android:textColor="@color/primary"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:strokeColor="#FFFFFF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#00FFFFFF"
+            android:text="@string/button_signUp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="אין לך חשבון?  "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="18dp"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+
