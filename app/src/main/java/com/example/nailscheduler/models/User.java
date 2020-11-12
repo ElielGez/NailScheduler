@@ -5,7 +5,6 @@ import com.example.nailscheduler.interfaces.IUser;
 
 public class User implements IUser {
     private String email;
-    private String password;
     private String fullName;
     private UserType type;
 
@@ -13,9 +12,8 @@ public class User implements IUser {
 
     }
 
-    public User(String email, String password, String fullName,UserType type) {
+    public User(String email, String fullName,UserType type) {
         this.email = email;
-        this.password = password;
         this.fullName = fullName;
         this.type = type;
     }
@@ -28,16 +26,6 @@ public class User implements IUser {
     @Override
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Override

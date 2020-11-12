@@ -7,7 +7,7 @@ public class Client extends User {
     public Client(){
 
     }
-    public Client(String email,String password,String fullName){
-        super(email,password,fullName, UserType.CLIENT);
+    public Client(String email,String fullName){
+        super(email,fullName, UserType.CLIENT);
     }
 }
