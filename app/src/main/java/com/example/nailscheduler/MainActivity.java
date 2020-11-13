@@ -13,6 +13,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
+
+
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth fAuth;
@@ -31,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-
         fAuth = FirebaseAuth.getInstance();
     }
-    public void logout(View view){
+
+    public void logout(View view) {
         fAuth.signOut();
         startActivity(new Intent(getApplicationContext(), LoginTest.class));
         finish();

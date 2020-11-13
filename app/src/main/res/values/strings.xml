@@ -3,4 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="button_signIn">כניסה</string>
+    <string name="button_signUp">הירשם!</string>
+    <string name="password">סיסמא</string>
+    <string name="Email">היכנס עם Email</string>
+    <string name="type_owner">אני בעל/ת עסק</string>
+    <string name="type_client">אני לקוח/ה</string>
+
 </resources>
