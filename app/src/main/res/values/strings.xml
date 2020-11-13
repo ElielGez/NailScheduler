@@ -9,5 +9,11 @@
     <string name="Email">היכנס עם Email</string>
     <string name="type_owner">אני בעל/ת עסק</string>
     <string name="type_client">אני לקוח/ה</string>
+    <string name="Email_Reg">Email</string>
+    <string name="fName_Reg">שם מלא</string>
+    <string name="business_name_Reg">שם בית העסק</string>
+    <string name="business_addr_Reg">כתובת</string>
+    <string name="phone_n_Reg">טלפון</string>
+    <string name="button_register">הירשם</string>
 
 </resources>
