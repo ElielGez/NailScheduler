@@ -29,7 +29,7 @@ public class LoginTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_test);
 
-        mType = UserType.CLIENT;
+        mType = UserType.BUSINESS_OWNER;
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
         mLoginBtn = findViewById(R.id.loginBtn);
@@ -72,7 +72,7 @@ public class LoginTest extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), RegisterClientTest.class));
                 }
                 else if(mType == UserType.BUSINESS_OWNER){
-
+                    startActivity(new Intent(getApplicationContext(), RegisterBusinessOwnerTest.class));
                 }
             }
         });
