@@ -88,9 +88,8 @@ public class RegisterBusiness extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 String uid = fAuth.getCurrentUser().getUid();
-                                BusinessOwner bo = new BusinessOwner(b_user_email, b_user_fname);
+                                BusinessOwner bo = new BusinessOwner(b_user_email, b_user_fname, b_phone);
                                 bo.setBusinessName(b_name);
-                                bo.setPhoneNumber(b_phone);
                                 bo.setAddress(b_addr);
                                 mDatabase.child("BusinessOwners").child(uid).setValue(bo).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override

@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button sign_up_btn,sign_in_btn;
+    private Button sign_up_btn, sign_in_btn;
     private EditText mEmail, mPassword;
     private FirebaseAuth fAuth;
     private UserType mType;
@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = findViewById(R.id.etPassword);
 
         fAuth = FirebaseAuth.getInstance();
-        if(fAuth.getCurrentUser() != null){
+        if (fAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
@@ -70,12 +70,11 @@ public class LoginActivity extends AppCompatActivity {
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mType == null) return;
-                else if(mType == UserType.CLIENT){
+                if (mType == null) return;
+                else if (mType == UserType.CLIENT) {
                     Intent i = new Intent(LoginActivity.this, RegisterClient.class);
                     startActivity(i);
-                }
-                else if(mType == UserType.BUSINESS_OWNER){
+                } else if (mType == UserType.BUSINESS_OWNER) {
                     Intent i = new Intent(LoginActivity.this, RegisterBusiness.class);
                     startActivity(i);
                 }
@@ -91,28 +90,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 case R.id.type_client:
                     mType = UserType.CLIENT;
-//                    sign_up_btn.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            Intent i = new Intent(LoginActivity.this, RegisterClient.class);
-//                            startActivity(i);
-//                        }
-//                    });
                     break;
                 case R.id.type_owner:
                     mType = UserType.BUSINESS_OWNER;
-//                    sign_up_btn.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            Intent i = new Intent(LoginActivity.this, RegisterBusiness.class);
-//                            startActivity(i);
-//                        }
-//                    });
                     break;
             }
-        }
-        else
-        {
+        } else {
             //view - didnt choose a type
         }
     }
