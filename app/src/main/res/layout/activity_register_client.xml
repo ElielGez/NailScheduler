@@ -4,92 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterClient"
     android:background="@drawable/pink"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="26dp"
-    >
+    tools:context=".RegisterClient">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
             android:gravity="center"
             android:text="הרשמה כלקוח"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="32sp" />
+            android:textSize="32sp"
+            android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/etFullName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="right"
-            android:hint="@string/fName_Reg"
-            android:imeOptions="actionNext"
-            android:inputType="textPersonName"
-            android:padding="8dp"
-            android:textSize="22sp" />
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="right"
-            android:hint="@string/Email_Reg"
-            android:imeOptions="actionNext"
-            android:inputType="textEmailAddress"
-            android:padding="8dp"
-            android:textSize="22sp" />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="right"
-            android:hint="@string/password"
-            android:imeOptions="actionDone"
-            android:padding="8dp"
-            android:textSize="22sp"
-            android:inputType="textPassword" />
+                <EditText
+                    android:id="@+id/etFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="right"
+                    android:hint="@string/fName_Reg"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="right"
+                    android:hint="@string/Email_Reg"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:padding="8dp"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="right"
+                    android:hint="@string/password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:textSize="22sp" />
 
 
-        <EditText
-            android:id="@+id/etPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="right"
-            android:hint="@string/phone_n_Reg"
-            android:imeOptions="actionDone"
-            android:padding="8dp"
-            android:textSize="22sp"
-            android:inputType="phone" />
+                <EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="right"
+                    android:hint="@string/phone_n_Reg"
+                    android:imeOptions="actionDone"
+                    android:inputType="phone"
+                    android:padding="8dp"
+                    android:textSize="22sp" />
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="140dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="150dp"
-            android:backgroundTint="#FFFFFF"
-            android:text="@string/button_signUp"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:strokeColor="#FFFFFF" />
+                <Button
+                    android:id="@+id/btnRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:text="@string/button_signUp"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:strokeColor="#FFFFFF" />
+            </LinearLayout>
+
+        </ScrollView>
+
     </LinearLayout>
-
-</LinearLayout>
 
