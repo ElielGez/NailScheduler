@@ -36,32 +36,29 @@ public class LoginActivity extends AppCompatActivity {
                     sign_up_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            Intent i = new Intent(LoginActivity.this, RegisterClient.class);
+                            startActivity(i);
                         }
                     });
                     sign_in_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-//                            Intent i = new Intent(LoginActivity.this, );
-//                            i.putExtra("User_Email", R.id.etEmail);
-//                            startActivity(i);
+
                         }
                     });
                     break;
-
                 case R.id.type_owner:
                     sign_up_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            Intent i = new Intent(LoginActivity.this, RegisterBusiness.class);
+                            startActivity(i);
                         }
                     });
                     sign_in_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-//                            Intent i = new Intent(LoginActivity.this, );
-//                            i.putExtra("User_Email", R.id.etEmail);
-//                            startActivity(i);
+
                         }
                     });
                     break;
