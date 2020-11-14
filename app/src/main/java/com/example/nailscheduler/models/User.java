@@ -6,15 +6,17 @@ import com.example.nailscheduler.interfaces.IUser;
 public class User implements IUser {
     private String email;
     private String fullName;
+    private String phoneNumber;
     private UserType type;
 
     public User() {
 
     }
 
-    public User(String email, String fullName,UserType type) {
+    public User(String email, String fullName,String phoneNumber,UserType type) {
         this.email = email;
         this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
         this.type = type;
     }
 
@@ -38,6 +40,17 @@ public class User implements IUser {
         this.fullName = fullName;
     }
 
+
+    @Override
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    @Override
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public UserType getType() {
         return type;
@@ -47,4 +60,5 @@ public class User implements IUser {
     public void setType(UserType type) {
         this.type = type;
     }
+
 }

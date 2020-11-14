@@ -8,6 +8,8 @@ public interface IUser {
     void setEmail(String email);
     String getFullName();
     void setFullName(String fullName);
+    String getPhoneNumber();
+    void setPhoneNumber(String phoneNumber);
     UserType getType();
     void setType(UserType type);
 }
