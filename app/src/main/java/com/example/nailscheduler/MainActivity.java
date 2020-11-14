@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void logout(View view) {
         fAuth.signOut();
-        startActivity(new Intent(getApplicationContext(), LoginTest.class));
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         finish();
     }
 }
