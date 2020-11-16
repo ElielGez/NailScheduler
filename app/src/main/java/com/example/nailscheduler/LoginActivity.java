@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nailscheduler.enums.UserType;
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         sign_in_btn = findViewById(R.id.btnSignIn);
         mEmail = findViewById(R.id.etEmail);
         mPassword = findViewById(R.id.etPassword);
+
+
 
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null) {
@@ -61,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         } else {
-                            Toast.makeText(LoginActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -70,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mType == null) return;
+                if (mType == null) Toast.makeText(LoginActivity.this, "Error: Required user type", Toast.LENGTH_LONG).show();
                 else if (mType == UserType.CLIENT) {
                     Intent i = new Intent(LoginActivity.this, RegisterClient.class);
                     startActivity(i);
@@ -95,8 +98,6 @@ public class LoginActivity extends AppCompatActivity {
                     mType = UserType.BUSINESS_OWNER;
                     break;
             }
-        } else {
-            //view - didnt choose a type
         }
     }
 }
