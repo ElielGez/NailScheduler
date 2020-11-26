@@ -11,8 +11,6 @@
     android:padding="26dp"
     >
 
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,6 +39,12 @@
             android:layout_gravity="end"
             android:text="@string/type_client"
             android:onClick="onRadioButtonClicked" />
+
+        <TextView
+            android:id="@+id/typeError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" " />
     </RadioGroup>
 
 

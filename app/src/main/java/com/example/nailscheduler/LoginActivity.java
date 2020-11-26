@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nailscheduler.enums.UserType;
@@ -37,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.etEmail);
         mPassword = findViewById(R.id.etPassword);
 
+
+
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -48,11 +51,13 @@ public class LoginActivity extends AppCompatActivity {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
-                    mEmail.setError("Required");
+                    mEmail.setError("יש להזין כתובת אימייל");
+                    mEmail.requestFocus();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    mPassword.setError("Required");
+                    mPassword.setError("יש להזין סיסמא");
+                    mPassword.requestFocus();
                     return;
                 }
                 fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -61,7 +66,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         } else {
-                            Toast.makeText(LoginActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(LoginActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -70,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mType == null) return;
+                if (mType == null) Toast.makeText(LoginActivity.this, "יש לבחור סוג משתמש", Toast.LENGTH_LONG).show();
                 else if (mType == UserType.CLIENT) {
                     Intent i = new Intent(LoginActivity.this, RegisterClient.class);
                     startActivity(i);
@@ -95,8 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                     mType = UserType.BUSINESS_OWNER;
                     break;
             }
-        } else {
-            //view - didnt choose a type
         }
     }
 }
