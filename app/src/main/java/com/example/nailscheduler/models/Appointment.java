@@ -17,7 +17,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(String clientID, String boID, String date, String time, AppointmentStatus status) {
+    public Appointment(String clientID, String boID, String date, AppointmentStatus status, String time) {
         this.clientID = clientID;
         this.boID = boID;
         this.date = date;

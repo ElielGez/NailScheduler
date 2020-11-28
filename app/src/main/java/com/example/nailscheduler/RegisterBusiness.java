@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -99,7 +100,7 @@ public class RegisterBusiness extends AppCompatActivity {
                                             Toast t = Toast.makeText(RegisterBusiness.this, "ההרשמה התבצעה בהצלחה! ", Toast.LENGTH_SHORT);
                                             t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
                                             t.show();
-                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                                         } else {
                                             Toast.makeText(RegisterBusiness.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }

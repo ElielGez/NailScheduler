@@ -49,13 +49,13 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
             String currStatus;
             switch (status) {
 
-                case NEW_REQUEST:
+                case NEW_REQUEST: //0
                     appointmentStatus.setText("NEW_REQUEST");
                     break;
-                case APPROVED:
+                case APPROVED: //1
                     appointmentStatus.setText("APPROVED");
                     break;
-                case CANCELED:
+                case CANCELED: //2
                     appointmentStatus.setText("CANCELED");
                     break;
 

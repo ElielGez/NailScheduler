@@ -31,7 +31,7 @@ public class BoManageAppointments extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bo_manage_appointments);
         listView= (ListView) findViewById(R.id.appointment_list_view);
-
+        appointmentsL=new ArrayList<>();
         fAuth = FirebaseAuth.getInstance();
         FirebaseUser BoCurrentUser = fAuth.getCurrentUser();
         if (fAuth.getCurrentUser() != null) {
@@ -42,9 +42,9 @@ public class BoManageAppointments extends AppCompatActivity {
                 mRef = FirebaseDatabase.getInstance().getReference("Appointments");
                 mRef.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot data : snapshot.getChildren()) {
-                            Appointment appointment = data.getValue(Appointment.class);
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            Appointment appointment = (Appointment) data.getValue(Appointment.class);
                             if (appointment.getBoID().equals(BoCurrentID)) {
                                 appointmentsL.add(appointment);
                             }
