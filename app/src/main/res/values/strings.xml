@@ -15,5 +15,6 @@
     <string name="business_addr_Reg">כתובת</string>
     <string name="phone_n_Reg">טלפון</string>
     <string name="button_register">הירשם</string>
+    <string name="button_bo_manage_appointments_test">צפייה ואישור תורים</string>
 
 </resources>
