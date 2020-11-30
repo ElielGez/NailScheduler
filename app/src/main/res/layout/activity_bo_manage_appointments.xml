@@ -17,7 +17,7 @@
         android:gravity="center"
         android:text="צפייה ואישור תורים"
         android:textColor="@color/black"
-        android:textSize="32sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <ListView

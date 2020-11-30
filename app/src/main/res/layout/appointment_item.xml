@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal">
@@ -11,33 +11,68 @@
     <TextView
         android:id="@+id/client_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_height="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:strokeColor="#FFFFFF"
         android:layout_weight="1" />
 
     <TextView
         android:id="@+id/appointment_date"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center"
         android:layout_weight="1"
-        android:textStyle="bold" />
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:strokeColor="#FFFFFF" />
 
     <TextView
-        android:id="@+id/appointment_time"
+        android:id="@+id/appointment_start_time"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_height="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:strokeColor="#FFFFFF"
+        android:layout_weight="0.5" />
 
+    <TextView
+        android:id="@+id/hyphen"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/activity_horizontal_margin"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="-"
+        android:layout_weight="0.5"
+        app:strokeColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/appointment_end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:strokeColor="#FFFFFF"
+        android:layout_weight="0.5" />
     <Button
         android:id="@+id/appointment_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
         android:layout_weight="1"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="@android:color/transparent"
         android:textColor="@color/black"
-        android:textSize="8dp"
         android:textStyle="bold"
-        app:strokeColor="#FFFFFF" />
+        app:strokeColor="#FFFFFF"
+        android:textSize="15dp"/>
 
 </LinearLayout>

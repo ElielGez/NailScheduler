@@ -1,8 +1,12 @@
 package com.example.nailscheduler;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -14,7 +18,6 @@ import com.example.nailscheduler.enums.AppointmentStatus;
 import com.example.nailscheduler.models.Appointment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AppointmentAdapter extends ArrayAdapter<Appointment> {
 
@@ -36,27 +39,31 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
         Appointment currentAppointment = getItem(position);
         if(currentAppointment!=null) {
             TextView clientNameTextView = (TextView) listItemView.findViewById(R.id.client_name);
-            clientNameTextView.setText(currentAppointment.getClientID());
+            clientNameTextView.setText(currentAppointment.getClientName());
 
             TextView appointmentDateTextView = (TextView) listItemView.findViewById(R.id.appointment_date);
             appointmentDateTextView.setText(currentAppointment.getDate());
 
-            TextView appointmentTimeTextView = (TextView) listItemView.findViewById(R.id.appointment_time);
-            appointmentTimeTextView.setText(currentAppointment.getTime());
+            TextView appointmentStartTimeTextView = (TextView) listItemView.findViewById(R.id.appointment_start_time);
+            appointmentStartTimeTextView.setText(String.valueOf(currentAppointment.getStartTime()));
+
+
+            TextView appointmentEndTimeTextView = (TextView) listItemView.findViewById(R.id.appointment_end_time);
+            appointmentEndTimeTextView.setText(String.valueOf(currentAppointment.getEndTime()));
 
             Button appointmentStatus= (Button) listItemView.findViewById(R.id.appointment_status);
             AppointmentStatus status=currentAppointment.getStatus();
-            String currStatus;
             switch (status) {
 
                 case NEW_REQUEST: //0
-                    appointmentStatus.setText("NEW_REQUEST");
+                    appointmentStatus.setText("בקשה לתור");
+                    appointmentStatus.setBackgroundColor(Color.WHITE);
                     break;
                 case APPROVED: //1
-                    appointmentStatus.setText("APPROVED");
+                    appointmentStatus.setText("תור אושר");
                     break;
                 case CANCELED: //2
-                    appointmentStatus.setText("CANCELED");
+                    appointmentStatus.setText("תור בוטל");
                     break;
 
                 default:

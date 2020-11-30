@@ -44,7 +44,7 @@ public class BoManageAppointments extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
-                            Appointment appointment = (Appointment) data.getValue(Appointment.class);
+                            Appointment appointment = data.getValue(Appointment.class);
                             if (appointment.getBoID().equals(BoCurrentID)) {
                                 appointmentsL.add(appointment);
                             }
