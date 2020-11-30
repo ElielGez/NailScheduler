@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.ColorInt;
@@ -16,14 +17,19 @@ import android.widget.TextView;
 
 import com.example.nailscheduler.enums.AppointmentStatus;
 import com.example.nailscheduler.models.Appointment;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class AppointmentAdapter extends ArrayAdapter<Appointment> {
-
+    private Context context;
+    private ArrayList<Appointment> appointments ;
 
     public AppointmentAdapter(@NonNull Context context, int resource, int textViewResourceId, @NonNull ArrayList<Appointment> appointments) {
         super(context, resource, textViewResourceId, appointments);
+        this.context=context;
+        this.appointments=appointments;
     }
 
     @NonNull
@@ -51,8 +57,8 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
             TextView appointmentEndTimeTextView = (TextView) listItemView.findViewById(R.id.appointment_end_time);
             appointmentEndTimeTextView.setText(String.valueOf(currentAppointment.getEndTime()));
 
-            Button appointmentStatus= (Button) listItemView.findViewById(R.id.appointment_status);
-            AppointmentStatus status=currentAppointment.getStatus();
+            Button appointmentStatus = (Button) listItemView.findViewById(R.id.appointment_status);
+            AppointmentStatus status = currentAppointment.getStatus();
             switch (status) {
 
                 case NEW_REQUEST: //0
@@ -60,16 +66,28 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
                     appointmentStatus.setBackgroundColor(Color.WHITE);
                     break;
                 case APPROVED: //1
-                    appointmentStatus.setText("תור אושר");
+                    appointmentStatus.setText("התור אושר");
                     break;
                 case CANCELED: //2
-                    appointmentStatus.setText("תור בוטל");
+                    appointmentStatus.setText("התור בוטל");
                     break;
 
                 default:
                     break;
 
             }
+            appointmentStatus.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v) {
+                    if (appointmentStatus.getText().equals("בקשה לתור")) {
+                        appointmentStatus.setText("התור אושר");
+                        appointmentStatus.setBackgroundColor(Color.TRANSPARENT);
+                        appointments.get(position).setStatus(AppointmentStatus.APPROVED);
+                    }
+                }
+            });
+            listItemView.setClickable(true);
         }
         return listItemView;
     }

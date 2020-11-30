@@ -73,6 +73,8 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:strokeColor="#FFFFFF"
-        android:textSize="15dp"/>
+        android:textSize="15dp"
+        android:focusable="false"
+      />
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import com.example.nailscheduler.enums.AppointmentStatus;
 
 public class Appointment {
 
+    private String key;
     private String clientID;
     private String clientName;
     private String boID;
@@ -17,7 +18,8 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(String clientID, String clientName, String boID, String boName, String date, int startTime, int endTime , AppointmentStatus status) {
+    public Appointment(String key , String clientID, String clientName, String boID, String boName, String date, int startTime, int endTime , AppointmentStatus status) {
+        this.key=key;
         this.clientID = clientID;
         this.clientName= clientName;
         this.boID = boID;
@@ -26,6 +28,13 @@ public class Appointment {
         this.status = status;
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getClientID() {
