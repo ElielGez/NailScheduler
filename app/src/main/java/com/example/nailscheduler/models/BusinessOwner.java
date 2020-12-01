@@ -4,7 +4,7 @@ import com.example.nailscheduler.enums.UserType;
 
 public class BusinessOwner extends User {
     private String businessName;
-    private String address;
+    private BoAddress boAddress;
 
     public BusinessOwner() {
 
@@ -22,11 +22,11 @@ public class BusinessOwner extends User {
         this.businessName = businessName;
     }
 
-    public String getAddress() {
-        return address;
+    public BoAddress getBoAddress() {
+        return boAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setBoAddress(BoAddress boAddress) {
+        this.boAddress = boAddress;
     }
 }
