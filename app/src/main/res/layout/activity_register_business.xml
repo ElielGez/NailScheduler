@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="הרשמה כבעל עסק"
         android:textColor="@color/black"
@@ -102,30 +102,65 @@
                 android:textSize="22sp" />
 
             <EditText
-                android:id="@+id/etBAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:gravity="right"
-                android:hint="@string/business_addr_Reg"
-                android:imeOptions="actionNext"
-                android:inputType="textPostalAddress"
-                android:padding="5dp"
-                android:textSize="22sp" />
-
-            <EditText
                 android:id="@+id/etBPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="right"
                 android:hint="@string/phone_n_Reg"
-                android:imeOptions="actionDone"
+                android:imeOptions="actionNext"
                 android:inputType="phone"
                 android:padding="8dp"
                 android:textSize="22sp" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="right"
+                android:text="כתובת העסק"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/addrCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textDirection="rtl"
+                android:layoutDirection="rtl"
+                android:hint="@string/business_addr_city"
+                android:imeOptions="actionNext"
+                android:padding="5dp"
+                android:textSize="22sp"/>
+
+            <EditText
+                android:id="@+id/addrStreet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="right"
+                android:hint="@string/business_addr_street"
+                android:imeOptions="actionNext"
+                android:inputType="textPostalAddress"
+                android:padding="5dp"
+                android:textSize="22sp" />
+            <EditText
+                android:id="@+id/addrNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="right"
+                android:hint="@string/business_addr_number"
+                android:imeOptions="actionDone"
+                android:inputType="textPostalAddress"
+                android:padding="5dp"
+                android:textSize="22sp" />
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="wrap_content"
