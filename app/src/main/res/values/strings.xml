@@ -18,5 +18,7 @@
     <string name="phone_n_Reg">טלפון</string>
     <string name="button_register">הירשם</string>
     <string name="button_bo_manage_appointments_test">צפייה ואישור תורים</string>
-
+    <string name="appointment_request">בקשה לתור</string>
+    <string name="appointment_approved">התור אושר</string>
+    <string name="appointment_canceled">התור בוטל</string>
 </resources>
