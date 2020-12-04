@@ -42,7 +42,7 @@ public class BoManageAppointments extends AppCompatActivity {
 
             if (BoCurrentUser != null) { // User logged in
                 String BoCurrentID = BoCurrentUser.getUid();
-                mRef = FirebaseDatabase.getInstance().getReference().child("Appointments");
+                mRef = FirebaseDatabase.getInstance().getReference().getRoot().child("Appointments");
                 mRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -64,10 +64,11 @@ public class BoManageAppointments extends AppCompatActivity {
 
                 });
 
-            } else {
-                // No user is signed in
-                finish();
             }
+            //else {
+//                // No user is signed in
+//                finish();
+//            }
 
         }
     }

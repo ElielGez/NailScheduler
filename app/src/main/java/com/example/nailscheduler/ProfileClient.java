@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +33,8 @@ public class ProfileClient extends AppCompatActivity {
     private TextView nameTxtView, emailTxtView, phoneTxtView;
     private DatabaseReference userRef;
     private String email,fname,phone;
+    private Button manageAppointment;
+    private Button scheduleAppointment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,8 @@ public class ProfileClient extends AppCompatActivity {
         nameTxtView = findViewById(R.id.tv_name);
         phoneTxtView = findViewById(R.id.tv_phone);
         emailTxtView = findViewById(R.id.tv_email);
-
+        manageAppointment = findViewById(R.id.btn_apt_hist);
+        scheduleAppointment = findViewById(R.id.btn_sched_apt);
         fAuth = FirebaseAuth.getInstance();
         FirebaseUser CurrentUser = fAuth.getCurrentUser();
         String CUid = CurrentUser.getUid();
@@ -67,7 +71,18 @@ public class ProfileClient extends AppCompatActivity {
                 Toast.makeText(ProfileClient.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+        manageAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+        scheduleAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         ProfileImage = (CircleImageView) findViewById(R.id.profile_image);
         ProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override

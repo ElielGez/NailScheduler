@@ -18,6 +18,8 @@
     <string name="phone_n_Reg">טלפון</string>
     <string name="button_register">הירשם</string>
     <string name="business_Pro">צפייה ואישור תורים</string>
+    <string name="client_Pro">צפייה ואישור תורים</string>
+    <string name="client_Pro_schedule">הזמן תור</string>
     <string name="phone_business_Pro">Business User Phone Number</string>
     <string name="email_business_Pro">Business User Email</string>
     <string name="phone_client_Pro">Client User Phone Number</string>
