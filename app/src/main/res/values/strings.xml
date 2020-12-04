@@ -12,7 +12,9 @@
     <string name="Email_Reg">Email</string>
     <string name="fName_Reg">שם מלא</string>
     <string name="business_name_Reg">שם בית העסק</string>
-    <string name="business_addr_Reg">כתובת</string>
+    <string name="business_addr_city">עיר</string>
+    <string name="business_addr_street">רחוב</string>
+    <string name="business_addr_number">מספר</string>
     <string name="phone_n_Reg">טלפון</string>
     <string name="button_register">הירשם</string>
     <string name="business_Pro">צפייה ואישור תורים</string>
