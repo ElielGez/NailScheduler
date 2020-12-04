@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +33,7 @@ public class ProfileBusiness extends AppCompatActivity {
     private TextView nameTxtView, emailTxtView, phoneTxtView;
     private DatabaseReference userRef;
     private String email,fname,phone;
+    private Button manage_apt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class ProfileBusiness extends AppCompatActivity {
         nameTxtView = findViewById(R.id.tv_name);
         phoneTxtView = findViewById(R.id.tv_phone);
         emailTxtView = findViewById(R.id.tv_email);
-
+        manage_apt =findViewById(R.id.manage_appointments);
         fAuth = FirebaseAuth.getInstance();
         FirebaseUser CurrentUser = fAuth.getCurrentUser();
         String CUid = CurrentUser.getUid();
@@ -65,6 +67,14 @@ public class ProfileBusiness extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Toast.makeText(ProfileBusiness.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        manage_apt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProfileBusiness.this, BoManageAppointments.class);
+                startActivity(i);
             }
         });
 

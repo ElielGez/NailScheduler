@@ -7,13 +7,13 @@
     tools:context=".ProfileBusiness">
 
     <Button
-        android:id="@+id/btn_sched_apt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/btn_apt_hist"
+        android:layout_width="166dp"
+        android:layout_height="42dp"
         android:layout_marginTop="556dp"
         android:background="#FFFFFF"
         android:backgroundTint="#CAC8C8"
-        android:text="@string/business_Pro"
+        android:text="@string/client_Pro"
         android:textColor="#FFFFFF"
         android:textColorLink="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,13 +22,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_apt_hist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/btn_sched_apt"
+        android:layout_width="166dp"
+        android:layout_height="42dp"
         android:layout_marginTop="604dp"
         android:background="#FFFFFF"
         android:backgroundTint="#CAC8C8"
-        android:text="@string/business_Pro"
+        android:text="@string/client_Pro_schedule"
         android:textColor="#FFFFFF"
         android:textColorLink="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"

@@ -45,7 +45,7 @@ public class RegisterClient extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), ProfileClient.class));
-            finish();
+           finish();
         }
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
