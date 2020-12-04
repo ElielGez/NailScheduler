@@ -44,7 +44,7 @@ public class RegisterClient extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), ProfileClient.class));
             finish();
         }
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +84,7 @@ public class RegisterClient extends AppCompatActivity {
                                             Toast t = Toast.makeText(RegisterClient.this, "ההרשמה התבצעה בהצלחה! ", Toast.LENGTH_SHORT);
                                             t.setGravity(Gravity.CENTER_VERTICAL, 0, 500);
                                             t.show();
-                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                            startActivity(new Intent(getApplicationContext(), ProfileClient.class));
                                         } else {
                                             Toast.makeText(RegisterClient.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
