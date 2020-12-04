@@ -65,7 +65,7 @@ public class RegisterBusiness extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), ProfileBusiness.class));
             finish();
         }
         sign_up_btn.setOnClickListener(new View.OnClickListener() {

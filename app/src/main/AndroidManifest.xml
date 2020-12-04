@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NailScheduler">
-        <activity android:name=".BoManageAppointments"></activity>
-        <activity android:name=".BoProfileTestLee" />
+        <activity android:name=".ProfileClient"></activity>
+        <activity android:name=".ProfileBusiness" />
         <activity android:name=".RegisterBusiness" />
         <activity android:name=".RegisterClient" />
         <activity android:name=".LoginActivity">
