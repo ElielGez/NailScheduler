@@ -49,7 +49,7 @@ public class RegisterBusiness extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), ProfileBusiness.class));
             finish();
         }
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
@@ -95,11 +95,11 @@ public class RegisterBusiness extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-
+          //                                  FirebaseUser currentUser = fAuth.getCurrentUser();
                                             Toast t = Toast.makeText(RegisterBusiness.this, "ההרשמה התבצעה בהצלחה! ", Toast.LENGTH_SHORT);
                                             t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
                                             t.show();
-                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                            startActivity(new Intent(getApplicationContext(), ProfileBusiness.class));
                                         } else {
                                             Toast.makeText(RegisterBusiness.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
