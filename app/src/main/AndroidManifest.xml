@@ -9,6 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NailScheduler">
+        <activity android:name=".ClientManageApts" />
+        <activity android:name=".ProfileClient" />
+        <activity android:name=".ProfileBusiness" />
+        <activity android:name=".RegisterBusiness" />
+        <activity android:name=".RegisterClient" />
+        <activity android:name=".BoManageAppointments" />
+        <activity android:name=".LoginActivity">
         <activity android:name=".ProfileClient"></activity>
         <activity android:name=".ProfileBusiness" ></activity>
         <activity android:name=".RegisterBusiness" ></activity>
@@ -17,7 +24,6 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
