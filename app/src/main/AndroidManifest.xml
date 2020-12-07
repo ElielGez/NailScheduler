@@ -15,12 +15,6 @@
         <activity android:name=".RegisterBusiness" />
         <activity android:name=".RegisterClient" />
         <activity android:name=".BoManageAppointments" />
-        <activity android:name=".LoginActivity">
-        <activity android:name=".ProfileClient"></activity>
-        <activity android:name=".ProfileBusiness" ></activity>
-        <activity android:name=".RegisterBusiness" ></activity>
-        <activity android:name=".RegisterClient" ></activity>
-        <activity android:name=".BoManageAppointments" ></activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
