@@ -3,6 +3,7 @@ package com.example.nailscheduler.models;
 import com.example.nailscheduler.enums.UserType;
 
 public class BusinessOwner extends User {
+    private String id;
     private String businessName;
     private BoAddress boAddress;
 
@@ -12,6 +13,14 @@ public class BusinessOwner extends User {
 
     public BusinessOwner(String email, String fullName, String phoneNumber) {
         super(email, fullName, phoneNumber, UserType.BUSINESS_OWNER);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getBusinessName() {
@@ -28,5 +37,10 @@ public class BusinessOwner extends User {
 
     public void setBoAddress(BoAddress boAddress) {
         this.boAddress = boAddress;
+    }
+
+    @Override
+    public String toString() {
+        return businessName;
     }
 }

@@ -24,6 +24,11 @@
 
     <string name="new_appointment_header">קביעת תור חדש</string>
     <string name="client_apt_view"></string>
+    <string name="date">תאריך</string>
+    <string name="startTime">שעת התחלה</string>
+    <string name="endTime">שעת סיום</string>
+    <string name="search">חפש</string>
+    <string name="create_apt">הזמן תור</string>
 
 
 </resources>

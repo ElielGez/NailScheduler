@@ -81,7 +81,8 @@ public class ProfileClient extends AppCompatActivity {
         scheduleAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(ProfileClient.this, NewAppointment.class);
+                startActivity(i);
             }
         });
         ProfileImage = (CircleImageView) findViewById(R.id.profile_image);
