@@ -47,9 +47,9 @@ public class ProfileClient extends AppCompatActivity {
         manageAppointment = findViewById(R.id.btn_apt_hist);
         scheduleAppointment = findViewById(R.id.btn_sched_apt);
         fAuth = FirebaseAuth.getInstance();
-        FirebaseUser CurrentUser = fAuth.getCurrentUser();
-        String CUid = CurrentUser.getUid();
-        userRef = FirebaseDatabase.getInstance().getReference().child("Clients").child(CUid);
+        FirebaseUser currentUser = fAuth.getCurrentUser();
+        String cUid = currentUser.getUid();
+        userRef = FirebaseDatabase.getInstance().getReference().child("Clients").child(cUid);
 
         // Read from the database
         userRef.addValueEventListener(new ValueEventListener() {
@@ -74,7 +74,8 @@ public class ProfileClient extends AppCompatActivity {
         manageAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(ProfileClient.this, ClientManageApts.class);
+                startActivity(i);
             }
         });
         scheduleAppointment.setOnClickListener(new View.OnClickListener() {

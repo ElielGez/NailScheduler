@@ -45,9 +45,9 @@ public class ProfileBusiness extends AppCompatActivity {
         emailTxtView = findViewById(R.id.tv_email);
         manage_apt =findViewById(R.id.manage_appointments);
         fAuth = FirebaseAuth.getInstance();
-        FirebaseUser CurrentUser = fAuth.getCurrentUser();
-        String CUid = CurrentUser.getUid();
-        userRef = FirebaseDatabase.getInstance().getReference().child("BusinessOwners").child(CUid);
+        FirebaseUser currentUser = fAuth.getCurrentUser();
+        String cUid = currentUser.getUid();
+        userRef = FirebaseDatabase.getInstance().getReference().child("BusinessOwners").child(cUid);
 
         // Read from the database
         userRef.addValueEventListener(new ValueEventListener() {
