@@ -26,6 +26,7 @@
     <string name="email_client_Pro">Client User Email</string>
     <string name="hello_Pro">שלום !</string>
 
+    <string name="new_appointment_header">קביעת תור חדש</string>
 
 
 </resources>

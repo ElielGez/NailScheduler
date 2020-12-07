@@ -9,34 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NailScheduler">
-        <activity android:name=".ProfileClient"></activity>
-        <activity android:name=".ProfileBusiness" ></activity>
-        <activity android:name=".RegisterBusiness" ></activity>
-        <activity android:name=".RegisterClient" ></activity>
-        <activity android:name=".BoManageAppointments" ></activity>
+        <activity android:name=".NewAppointment"></activity>
+        <activity android:name=".ProfileClient" />
+        <activity android:name=".ProfileBusiness" />
+        <activity android:name=".RegisterBusiness" />
+        <activity android:name=".RegisterClient" />
+        <activity android:name=".BoManageAppointments" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-<!--        <activity-->
-<!--            android:name=".MainActivity"-->
-<!--            android:label="@string/app_name">-->
-
-<!--             <intent-filter> -->
-<!--             <action android:name="android.intent.action.MAIN" /> -->
-
-
-<!--             <category android:name="android.intent.category.LAUNCHER" /> -->
-<!--             </intent-filter> -->
-<!--        </activity>-->
     </application>
+
 </manifest>
