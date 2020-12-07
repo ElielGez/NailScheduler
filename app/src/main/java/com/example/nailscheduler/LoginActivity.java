@@ -45,12 +45,27 @@ public class LoginActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.etEmail);
         mPassword = findViewById(R.id.etPassword);
 
-
-
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
+            //TODO: make this check as service function
+            DatabaseReference userRef;
+            userRef = FirebaseDatabase.getInstance().getReference("BusinessOwners").child(fAuth.getUid());
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()) {
+                        startActivity(new Intent(getApplicationContext(), ProfileBusiness.class));
+                        finish();
+                    } else  {
+                        startActivity(new Intent(getApplicationContext(), ProfileClient.class));
+                        finish();
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(LoginActivity.this, "Error:", Toast.LENGTH_LONG).show();
+                }
+            });
         }
         sign_in_btn.setOnClickListener(new View.OnClickListener() {
             @Override
