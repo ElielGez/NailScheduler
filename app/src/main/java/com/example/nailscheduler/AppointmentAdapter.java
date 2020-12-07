@@ -48,6 +48,7 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
         }
         Appointment currentAppointment = getItem(position);
         if(currentAppointment!=null) {
+
             TextView clientNameTextView = (TextView) listItemView.findViewById(R.id.client_name);
             clientNameTextView.setText(currentAppointment.getClientName());
 

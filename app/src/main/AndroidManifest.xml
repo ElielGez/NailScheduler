@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NailScheduler">
         <activity android:name=".NewAppointment"></activity>
+        <activity android:name=".ClientManageApts" />
         <activity android:name=".ProfileClient" />
         <activity android:name=".ProfileBusiness" />
         <activity android:name=".RegisterBusiness" />
