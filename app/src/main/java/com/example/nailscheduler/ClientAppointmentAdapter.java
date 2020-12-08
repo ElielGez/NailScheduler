@@ -1,20 +1,26 @@
 package com.example.nailscheduler;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.nailscheduler.enums.AppointmentStatus;
 import com.example.nailscheduler.models.Appointment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -72,13 +78,72 @@ public class ClientAppointmentAdapter extends ArrayAdapter<Appointment> {
                 default:
                     break;
             }
-            appointmentStatus.setOnClickListener(new View.OnClickListener() {
+
+            appointmentStatus.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
                 public void onClick(View v) {
+                    if (appointmentStatus.getText().equals("התור מאושר")) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage("האם ברצונך לבטל את התור?");
+                        builder.setTitle("ביטול תור");
+                        builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                appointmentStatus.setText("התור בוטל");
+                                Appointment cancelled_appointment = (Appointment) appointments.get(position);
+                                cancelled_appointment.setStatus(AppointmentStatus.CANCELED);
+                                ((ClientManageApts) context).mRef.child(cancelled_appointment.getKey()).child("status").setValue(AppointmentStatus.CANCELED).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            String ap_date = cancelled_appointment.getDate();
+                                            String[] s = ap_date.split("/");
+                                            ((ClientManageApts) context).mRef.getRoot().child("Approved_Appointments").child(s[0]).child(s[1]).child(s[2]).child(String.valueOf(cancelled_appointment.getStartTime())).child(String.valueOf(cancelled_appointment.getEndTime())).child(cancelled_appointment.getBoID()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Toast t = Toast.makeText(context, "התור בוטל בהצלחה! ", Toast.LENGTH_SHORT);
+                                                        t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
+                                                        t.show();
 
+                                                    } else {
+                                                        Toast.makeText(context, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                        } else {
+                                            Toast.makeText(context, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    }
+                                });
+                            }
+                        });
+                        builder.setNegativeButton("לא", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface arg0) {
+                                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundColor(Color.TRANSPARENT);
+                                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setBackgroundColor(Color.TRANSPARENT);
+                                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+                                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                            }
+                        });
+                        alertDialog.show();
+                    }
                 }
+
             });
         }
         return listItemView;
         }
+
+
 }
