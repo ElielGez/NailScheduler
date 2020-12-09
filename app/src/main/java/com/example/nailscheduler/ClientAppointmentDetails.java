@@ -9,11 +9,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nailscheduler.models.Appointment;
+import com.example.nailscheduler.models.CityJSON;
+import com.example.nailscheduler.services.CitiesAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ClientAppointmentDetails extends AppCompatActivity {
 
@@ -26,6 +30,7 @@ public class ClientAppointmentDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_appointment_details);
+        ArrayList<CityJSON> cities = CitiesAdapter.readJsonCities(this);
         dateTxtView = findViewById(R.id.date);
         timeTxtView = findViewById(R.id.time);
         boNameTxtView = findViewById(R.id.businessName);
@@ -60,13 +65,13 @@ public class ClientAppointmentDetails extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     boName = snapshot.child("businessName").getValue().toString();
                     boNumber = snapshot.child("phoneNumber").getValue().toString();
-                    boCity = snapshot.child("boAddress").child("city").getValue().toString();
+                    boCity = snapshot.child("boAddress").child("cityName").getValue().toString();
                     boStreet = snapshot.child("boAddress").child("street").getValue().toString();
                     boNumAd = snapshot.child("boAddress").child("number").getValue().toString();
 
                     boNameTxtView.setText(boName);
                     boPhoneTxtView.setText(boNumber);
-                    boAddressTxtView.setText(boCity + ", " + boStreet + " " + boNumAd);
+                    boAddressTxtView.setText(boStreet+ " " + boNumAd + ", " +boCity);
                 }
 
                 @Override
