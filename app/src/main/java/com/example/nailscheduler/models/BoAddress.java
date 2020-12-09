@@ -4,14 +4,27 @@ public class BoAddress {
     private String city;
     private String street;
     private String number;
+    private String cityName;
+
     public BoAddress(){
 
     }
-    public BoAddress(String city, String street, String number) {
+
+    public BoAddress(String city, String cityName, String street, String number) {
         this.city = city;
         this.street = street;
         this.number = number;
+        this.cityName = cityName;
     }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
 
     public String getCity() {
         return city;

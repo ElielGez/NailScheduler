@@ -87,9 +87,9 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
                 public void onClick(View v) {
                     if (appointmentStatus.getText().equals("בקשה לתור")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setMessage("האם לאשר את התור ?");
-                        builder.setTitle("אישור בקשה לתור");
-                        builder.setPositiveButton("אשר", new DialogInterface.OnClickListener() {
+                        builder.setMessage("האם ברצונך לאשר את התור ?");
+                        builder.setTitle("אישור תור");
+                        builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 appointmentStatus.setText("התור אושר");
@@ -123,7 +123,7 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
                                 });
                             }
                         });
-                        builder.setNegativeButton("בטל", new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton("לא", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();

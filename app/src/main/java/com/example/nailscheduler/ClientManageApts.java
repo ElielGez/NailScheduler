@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,8 +46,26 @@ public class ClientManageApts extends AppCompatActivity {
         FirebaseUser clCurrentUser = fAuth.getCurrentUser();
 
         if (clCurrentUser != null) { // User logged in
-            //POPUP? - Explain Deletion נחתן לבטל תור בעל status ״התור מאושר״
-            // עד 24 שעות לפני מועד התור
+            //POPUP - Appointment Cancellation Explanation
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(" ");
+            builder.setMessage("ניתן לבטל תור בעל סטטוס ״התור מאושר״ עד 24 שעות לפני מועד התור");
+            builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface arg0) {
+                    alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setBackgroundColor(Color.TRANSPARENT);
+                    alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.BLACK);
+                }
+            });
+            alertDialog.show();
+
             String clCurrentID = clCurrentUser.getUid();
             mRef = FirebaseDatabase.getInstance().getReference().getRoot().child("Appointments");
             mRef.addValueEventListener(new ValueEventListener() {
@@ -62,24 +84,21 @@ public class ClientManageApts extends AppCompatActivity {
                         @Override
                         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                            //Activity to show apt details
-
-                            Toast.makeText(ClientManageApts.this, "Error: ", Toast.LENGTH_LONG).show();
-
+                           String currentBO = appointmentsL.get(position).getBoID();
+                           String aptKey = appointmentsL.get(position).getKey();
+                            Intent i = new Intent(ClientManageApts.this, ClientAppointmentDetails.class);
+                            i.putExtra("businessOwner", currentBO);
+                            i.putExtra("appointmentKey", aptKey);
+                            startActivity(i);
                             return true;
 
                         }
                     });
-                    //POPUP? - Explain Deletion נחתן לבטל תור בעל status ״התור מאושר״
-                    // עד 24 שעות לפני מועד התור
-                }
-                //POPUP? - Explain Deletion נחתן לבטל תור בעל status ״התור מאושר״
-                // עד 24 שעות לפני מועד התור
+               }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-
             });
 
         }

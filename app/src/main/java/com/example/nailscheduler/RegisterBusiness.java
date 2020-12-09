@@ -77,6 +77,7 @@ public class RegisterBusiness extends AppCompatActivity {
                 String b_name = business_name.getText().toString().trim();
                 String b_phone = phone.getText().toString().trim();
                 String b_addrcity = "" + ((CityJSON)city.getSelectedItem()).getKey();
+                String b_addrcityName = ((CityJSON)city.getSelectedItem()).getValue();
                 String b_addrstreet = street.getText().toString().trim();
                 String b_addrnumber = number.getText().toString().trim();
 
@@ -113,7 +114,7 @@ public class RegisterBusiness extends AppCompatActivity {
                                 String uid = fAuth.getCurrentUser().getUid();
                                 BusinessOwner bo = new BusinessOwner(b_user_email, b_user_fname, b_phone);
                                 bo.setBusinessName(b_name);
-                                BoAddress boa = new BoAddress(b_addrcity, b_addrstreet, b_addrnumber);
+                                BoAddress boa = new BoAddress(b_addrcity, b_addrcityName, b_addrstreet, b_addrnumber);
                                 bo.setBoAddress(boa);
                                 mDatabase.child("BusinessOwners").child(uid).setValue(bo).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -126,7 +127,7 @@ public class RegisterBusiness extends AppCompatActivity {
                                                         Toast t = Toast.makeText(RegisterBusiness.this, "ההרשמה התבצעה בהצלחה! ", Toast.LENGTH_SHORT);
                                                         t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
                                                         t.show();
-                                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                                        startActivity(new Intent(getApplicationContext(), ProfileBusiness.class));
                                                     }
                                                 }
                                             });
