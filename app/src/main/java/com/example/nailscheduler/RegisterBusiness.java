@@ -40,6 +40,7 @@ public class RegisterBusiness extends AppCompatActivity {
     private EditText business_name;
     private AutoCompleteTextView city;
     private int selectedCityKey;
+    private String selectedCityValue;
     private EditText street;
     private EditText number;
     private EditText email;
@@ -67,6 +68,7 @@ public class RegisterBusiness extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CityJSON selectedItem = (CityJSON) parent.getItemAtPosition(position);
                 selectedCityKey = selectedItem.getKey();
+                selectedCityValue = selectedItem.getValue();
             }
         });
         street = findViewById(R.id.addrStreet);
@@ -87,6 +89,7 @@ public class RegisterBusiness extends AppCompatActivity {
                 String b_name = business_name.getText().toString().trim();
                 String b_phone = phone.getText().toString().trim();
                 String b_addrcity = "" + selectedCityKey;
+                String b_addrcityName = selectedCityName;
                 String b_addrstreet = street.getText().toString().trim();
                 String b_addrnumber = number.getText().toString().trim();
 
@@ -124,7 +127,7 @@ public class RegisterBusiness extends AppCompatActivity {
                                 String uid = fAuth.getCurrentUser().getUid();
                                 BusinessOwner bo = new BusinessOwner(b_user_email, b_user_fname, b_phone);
                                 bo.setBusinessName(b_name);
-                                BoAddress boa = new BoAddress(b_addrcity, b_addrstreet, b_addrnumber);
+                                BoAddress boa = new BoAddress(b_addrcity, b_addrcityName, b_addrstreet, b_addrnumber);
                                 bo.setBoAddress(boa);
                                 mDatabase.child("BusinessOwners").child(uid).setValue(bo).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
