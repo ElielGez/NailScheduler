@@ -89,7 +89,7 @@ public class RegisterBusiness extends AppCompatActivity {
                 String b_name = business_name.getText().toString().trim();
                 String b_phone = phone.getText().toString().trim();
                 String b_addrcity = "" + selectedCityKey;
-                String b_addrcityName = selectedCityName;
+                String b_addrcityName = selectedCityValue;
                 String b_addrstreet = street.getText().toString().trim();
                 String b_addrnumber = number.getText().toString().trim();
 
