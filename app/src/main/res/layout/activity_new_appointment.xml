@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pink"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".NewAppointment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="#41FF2DE2"
+        android:gravity="center"
+        android:text="@string/new_appointment_header"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <AutoCompleteTextView
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:hint="@string/business_addr_city"
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            android:layoutDirection="rtl"
+            android:padding="5dp"
+            android:textDirection="rtl"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/endTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:hint="@string/endTime"
+                android:inputType="none"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl" />
+
+            <EditText
+                android:id="@+id/startTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/startTime"
+                android:inputType="number"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl" />
+
+            <EditText
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="@string/date"
+                android:inputType="date"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/searchAppointment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/search"
+            android:textColor="@color/black"
+            app:strokeColor="#FFFFFF" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/selectBoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layoutDirection="rtl"
+        android:textDirection="rtl"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="בחר בעל עסק:"/>
+        <Spinner
+            android:id="@+id/selectBo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl"
+            android:imeOptions="actionDone"
+            android:padding="5dp"/>
+        <Button
+            android:id="@+id/createAppointment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/create_apt"
+            android:textColor="@color/black"
+            app:strokeColor="#FFFFFF" />
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/searchBtnPB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/searchAppointment"
+        android:layout_alignEnd="@+id/searchAppointment"
+        android:layout_alignRight="@+id/searchAppointment"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:backgroundTint="@color/black"/>
+    <LinearLayout
+        android:id="@+id/noMatchFoundLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layoutDirection="rtl"
+        android:textDirection="rtl"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="לא נמצאו בעלי עסק"
+            android:textSize="17sp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -8,6 +8,8 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="26dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".RegisterBusiness">
 
     <TextView
@@ -73,7 +75,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="right"
                 android:hint="@string/password"
-                android:imeOptions="actionDone"
+                android:imeOptions="actionNext"
                 android:inputType="textPassword"
                 android:padding="5dp"
                 android:textSize="22sp" />
@@ -124,7 +126,7 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <Spinner
+            <AutoCompleteTextView
                 android:id="@+id/addrCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

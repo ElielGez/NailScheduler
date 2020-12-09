@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -36,7 +38,9 @@ public class RegisterBusiness extends AppCompatActivity {
     private Button sign_up_btn;
     private EditText full_name;
     private EditText business_name;
-    private Spinner city;
+    private AutoCompleteTextView city;
+    private int selectedCityKey;
+    private String selectedCityValue;
     private EditText street;
     private EditText number;
     private EditText email;
@@ -58,7 +62,15 @@ public class RegisterBusiness extends AppCompatActivity {
         phone = findViewById(R.id.etBPhone);
         business_name = findViewById(R.id.etBname);
         city = findViewById(R.id.addrCity);
-        city.setAdapter(new ArrayAdapter<CityJSON>(this, android.R.layout.simple_spinner_dropdown_item,cities));
+        city.setAdapter(new ArrayAdapter<CityJSON>(this, android.R.layout.simple_list_item_1,cities));
+        city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CityJSON selectedItem = (CityJSON) parent.getItemAtPosition(position);
+                selectedCityKey = selectedItem.getKey();
+                selectedCityValue = selectedItem.getValue();
+            }
+        });
         street = findViewById(R.id.addrStreet);
         number = findViewById(R.id.addrNumber);
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -76,8 +88,8 @@ public class RegisterBusiness extends AppCompatActivity {
                 String b_user_pwd = password.getText().toString().trim();
                 String b_name = business_name.getText().toString().trim();
                 String b_phone = phone.getText().toString().trim();
-                String b_addrcity = "" + ((CityJSON)city.getSelectedItem()).getKey();
-                String b_addrcityName = ((CityJSON)city.getSelectedItem()).getValue();
+                String b_addrcity = "" + selectedCityKey;
+                String b_addrcityName = selectedCityValue;
                 String b_addrstreet = street.getText().toString().trim();
                 String b_addrnumber = number.getText().toString().trim();
 
@@ -96,6 +108,7 @@ public class RegisterBusiness extends AppCompatActivity {
                     business_name.setError("יש להזין שם בית העסק");
                     business_name.requestFocus();
                 } else if (b_addrcity.isEmpty()) {
+                    city.setError("יש להזין עיר");
                     city.requestFocus();
                 } else if (b_addrstreet.isEmpty()) {
                     street.setError("יש להזין רחוב");

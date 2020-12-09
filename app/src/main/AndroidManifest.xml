@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NailScheduler">
+        <activity android:name=".NewAppointment"></activity>
         <activity android:name=".ClientAppointmentDetails"></activity>
         <activity android:name=".ClientManageApts" />
         <activity android:name=".ProfileClient" />
