@@ -22,9 +22,12 @@ import com.example.nailscheduler.enums.AppointmentStatus;
 import com.example.nailscheduler.models.Appointment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.collection.LLRBNode;
 import java.util.ArrayList;
 
@@ -76,6 +79,9 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
                 case CANCELED: //2
                     appointmentStatus.setText("התור בוטל");
                     break;
+                case REQUEST_DENIED: //3
+                    appointmentStatus.setText("תור לא אושר");
+                    break;
 
                 default:
                     break;
@@ -90,63 +96,96 @@ public class AppointmentAdapter extends ArrayAdapter<Appointment> {
                         builder.setMessage("האם ברצונך לאשר את התור ?");
                         builder.setTitle("אישור תור");
                         builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                appointmentStatus.setText("התור אושר");
-                                appointmentStatus.setBackgroundColor(Color.TRANSPARENT);
-                                Appointment approved_appointment = (Appointment) appointments.get(position);
-                                approved_appointment.setStatus(AppointmentStatus.APPROVED);
-                                ((BoManageAppointments) context).mRef.child(approved_appointment.getKey()).child("status").setValue(AppointmentStatus.APPROVED).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            String ap_date = approved_appointment.getDate();
-                                            String[] s = ap_date.split("/");
-                                            ((BoManageAppointments) context).mRef.getRoot().child("Approved_Appointments").child(s[0]).child(s[1]).child(s[2]).child(String.valueOf(approved_appointment.getStartTime())).child(String.valueOf(approved_appointment.getEndTime())).child(approved_appointment.getBoID()).child(approved_appointment.getClientID()).setValue("true").addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()) {
-                                                        Toast t = Toast.makeText(context, "התור אושר בהצלחה! ", Toast.LENGTH_SHORT);
-                                                        t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
-                                                        t.show();
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Appointment approved_appointment = (Appointment) appointments.get(position);
+                                        DatabaseReference ref= FirebaseDatabase.getInstance().getReference().getRoot().child("Appointments").child(approved_appointment.getKey()).child("status");
+                                        String ap_date = approved_appointment.getDate();
+                                        String[] s = ap_date.split("/");
+                                        ((BoManageAppointments) context).mRef.getRoot().child("Approved_Appointments").child(s[0]).child(s[1]).child(s[2]).child(String.valueOf(approved_appointment.getStartTime())).child(String.valueOf(approved_appointment.getEndTime())).child(approved_appointment.getBoID()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if (snapshot.exists()) {
+                                                    ref.setValue(AppointmentStatus.REQUEST_DENIED).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                appointmentStatus.setText("תור לא אושר");
+                                                                appointmentStatus.setBackgroundColor(Color.TRANSPARENT);
+                                                                approved_appointment.setStatus(AppointmentStatus.REQUEST_DENIED);
+                                                                Toast t = Toast.makeText(context, "לא ניתן לאשר , קיים תור בשעה זו !", Toast.LENGTH_SHORT);
+                                                                t.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                                                dialogInterface.dismiss();
+                                                                t.show();
 
-                                                    } else {
-                                                        Toast.makeText(context, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                                    }
+                                                            }
+                                                            else
+                                                            {
+                                                                Toast.makeText(context, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }
+                                                    });
+
+                                                } else {
+                                                    appointmentStatus.setText("התור אושר");
+                                                    appointmentStatus.setBackgroundColor(Color.TRANSPARENT);
+                                                    approved_appointment.setStatus(AppointmentStatus.APPROVED);
+                                                    ref.setValue(AppointmentStatus.APPROVED).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                ((BoManageAppointments) context).mRef.getRoot().child("Approved_Appointments").child(s[0]).child(s[1]).child(s[2]).child(String.valueOf(approved_appointment.getStartTime())).child(String.valueOf(approved_appointment.getEndTime())).child(approved_appointment.getBoID()).child(approved_appointment.getClientID()).setValue("true").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            Toast t = Toast.makeText(context, "התור אושר בהצלחה! ", Toast.LENGTH_SHORT);
+                                                                            t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
+                                                                            t.show();
+
+                                                                        } else {
+                                                                            Toast.makeText(context, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    }
+                                                                });
+                                                            } else {
+                                                                Toast.makeText(context, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }
+                                                    });
                                                 }
-                                            });
-                                        } else {
-                                            Toast.makeText(context, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
+                                            }
 
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
                                     }
                                 });
+                                builder.setNegativeButton("לא", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                });
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                                    @Override
+                                    public void onShow(DialogInterface arg0) {
+                                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundColor(Color.TRANSPARENT);
+                                        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setBackgroundColor(Color.TRANSPARENT);
+                                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+                                        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                                    }
+                                });
+                                alertDialog.show();
                             }
-                        });
-                        builder.setNegativeButton("לא", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        });
-                        AlertDialog alertDialog = builder.create();
-                        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                            @Override
-                            public void onShow(DialogInterface arg0) {
-                                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundColor(Color.TRANSPARENT);
-                                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setBackgroundColor(Color.TRANSPARENT);
-                                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
-                                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
-                            }
-                        });
-                        alertDialog.show();
-                    }
+                        }
+
+                    });
                 }
-
-            });
-        }
         return listItemView;
-    }
+            }
 
 
-}
+        }

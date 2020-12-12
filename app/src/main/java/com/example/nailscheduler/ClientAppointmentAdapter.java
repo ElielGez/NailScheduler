@@ -74,6 +74,9 @@ public class ClientAppointmentAdapter extends ArrayAdapter<Appointment> {
                 case CANCELED: //2
                    appointmentStatus.setText("התור בוטל");
                     break;
+                case REQUEST_DENIED: //3
+                    appointmentStatus.setText("תור לא אושר");
+                    break;
 
                 default:
                     break;
