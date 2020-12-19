@@ -1,12 +1,14 @@
 package com.example.nailscheduler;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.nailscheduler.enums.AppointmentStatus;
 import com.example.nailscheduler.models.Appointment;
 import com.example.nailscheduler.models.BusinessOwner;
+import com.example.nailscheduler.services.FirebaseStorageManage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,19 +20,19 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -65,6 +67,8 @@ public class NewAppointment extends AppCompatActivity {
     private Button createAppointment;
     private String clientName;
     private Appointment selectedAp;
+    private ImageView exampleNailImage;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,17 @@ public class NewAppointment extends AppCompatActivity {
         selectBo = findViewById(R.id.selectBo);
         noMatchFoundLayout = findViewById(R.id.noMatchFoundLayout);
         createAppointment = findViewById(R.id.createAppointment);
+        exampleNailImage = findViewById(R.id.exampleNailImage);
+
+        exampleNailImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1);
+            }
+        });
 
         mDatabase.child("Clients").child(fAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -169,7 +184,7 @@ public class NewAppointment extends AppCompatActivity {
             public void onClick(View v) {
                 searchBtnPB.setVisibility(View.VISIBLE);
                 String key = mDatabase.push().getKey();
-                BusinessOwner bo = (BusinessOwner)selectBo.getSelectedItem();
+                BusinessOwner bo = (BusinessOwner) selectBo.getSelectedItem();
                 selectedAp.setKey(key);
                 selectedAp.setBoID(bo.getId());
                 selectedAp.setBoName(bo.getBusinessName());
@@ -178,6 +193,9 @@ public class NewAppointment extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            if (imageUri != null) {
+                                FirebaseStorageManage.uploadAppointmentImage(key, FirebaseStorageManage.APT_IMAGE_EXAMPLE, imageUri);
+                            }
                             Toast t = Toast.makeText(NewAppointment.this, "התור הוזמן בהצלחה! ", Toast.LENGTH_SHORT);
                             t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
                             t.show();
@@ -210,7 +228,7 @@ public class NewAppointment extends AppCompatActivity {
                     selectBoLayout.setVisibility(View.GONE);
                     noMatchFoundLayout.setVisibility(View.GONE);
                     String[] dateSplit = b_date.split("/");
-                    selectedAp = new Appointment("",fAuth.getUid(),clientName,"","",b_date,Integer.parseInt(b_startTime),Integer.parseInt(b_endTime), AppointmentStatus.NEW_REQUEST);
+                    selectedAp = new Appointment("", fAuth.getUid(), clientName, "", "", b_date, Integer.parseInt(b_startTime), Integer.parseInt(b_endTime), AppointmentStatus.NEW_REQUEST);
                     mDatabase.child("BoAddresses").child(b_city).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -282,5 +300,14 @@ public class NewAppointment extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+            exampleNailImage.setImageURI(imageUri);
+        }
     }
 }
