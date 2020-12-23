@@ -3,21 +3,38 @@ package com.example.nailscheduler;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nailscheduler.models.Appointment;
 import com.example.nailscheduler.models.CityJSON;
 import com.example.nailscheduler.services.CitiesAdapter;
+import com.example.nailscheduler.services.NotificationPublisher;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class ClientAppointmentDetails extends AppCompatActivity {
 
@@ -26,6 +43,8 @@ public class ClientAppointmentDetails extends AppCompatActivity {
     public DatabaseReference mRefApt, mRefBo ;
     String aptDate, aptStart, aptEnd, boName, boNumber, boCity, boStreet, boNumAd;
     private TextView dateTxtView, timeTxtView, boNameTxtView, boPhoneTxtView, boAddressTxtView;
+    private int startT;
+    private Button addAlert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +55,7 @@ public class ClientAppointmentDetails extends AppCompatActivity {
         boNameTxtView = findViewById(R.id.businessName);
         boPhoneTxtView = findViewById(R.id.businessPhoneNumber);
         boAddressTxtView = findViewById(R.id.businessAddress);
+        addAlert = findViewById((R.id.addReminder));
 
         Intent intent = getIntent();
         currentBO = intent.getExtras().getString("businessOwner");
@@ -77,6 +97,31 @@ public class ClientAppointmentDetails extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
+
+            addAlert.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        Toast t = Toast.makeText(ClientAppointmentDetails.this, "התווספה התראה לתור! ", Toast.LENGTH_SHORT);
+                        t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
+                        t.show();
+                        Intent intent = new Intent(ClientAppointmentDetails.this, NotificationPublisher.class);
+                        intent.putExtra("boName",boName);
+                        intent.putExtra("startTime", aptStart);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(ClientAppointmentDetails.this, 1 , intent ,0);
+                        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                        int utcStart = Integer.parseInt(aptStart);
+                      //  String fulldate = aptDate+" "+startT+":00:00";
+                        String fulldate = "23/12/2020"+" "+"19:41:00";
+                        DateTimeFormatter formatter = null;
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH);
+                        LocalDateTime localDate = LocalDateTime.parse(fulldate, formatter);
+                        long timeInMilliseconds = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli();
+                        System.out.println("timeInMilliseconds    " + timeInMilliseconds);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP,timeInMilliseconds,pendingIntent);
+                    }
                 }
             });
     }

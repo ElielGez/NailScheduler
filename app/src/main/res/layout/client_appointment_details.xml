@@ -170,4 +170,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.651" />
+
+    <Button
+        android:id="@+id/addReminder"
+        android:layout_width="251dp"
+        android:layout_height="45dp"
+        android:layout_gravity="right"
+        android:backgroundTint="@color/white"
+        android:text="@string/add_reminder"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.927"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.808"
+        app:strokeColor="#FFFFFF" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

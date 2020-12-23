@@ -1,5 +1,7 @@
 package com.example.nailscheduler;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ public class ProfileClient extends AppCompatActivity {
     private String email,fname,phone;
     private Button manageAppointment;
     private Button scheduleAppointment;
+    public static final String NOTIFICATION_CHANNEL_ID = "CHANNEL" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,6 @@ public class ProfileClient extends AppCompatActivity {
         FirebaseUser currentUser = fAuth.getCurrentUser();
         String cUid = currentUser.getUid();
         userRef = FirebaseDatabase.getInstance().getReference().child("Clients").child(cUid);
-
         // Read from the database
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -97,6 +99,7 @@ public class ProfileClient extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(gallery, "Select Picture"), PICK_IMAGE);
             }
         });
+        createNotificationChannel();
     }
 
     @Override
@@ -119,5 +122,19 @@ public class ProfileClient extends AppCompatActivity {
         fAuth.signOut();
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         finish();
+    }
+
+        private void createNotificationChannel()
+    {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            CharSequence name = "NailScheduler - Channel";
+            String description = "Notification channel for NailScheduler";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager nm= getSystemService(NotificationManager.class);
+            nm.createNotificationChannel(channel);
+        }
     }
 }
