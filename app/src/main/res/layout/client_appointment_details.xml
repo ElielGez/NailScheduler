@@ -173,7 +173,7 @@
 
     <Button
         android:id="@+id/addReminder"
-        android:layout_width="251dp"
+        android:layout_width="376dp"
         android:layout_height="45dp"
         android:layout_gravity="right"
         android:backgroundTint="@color/white"

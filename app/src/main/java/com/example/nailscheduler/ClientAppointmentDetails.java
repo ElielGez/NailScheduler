@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -100,28 +101,33 @@ public class ClientAppointmentDetails extends AppCompatActivity {
                 }
             });
 
-            addAlert.setOnClickListener(new View.OnClickListener() {
+        addAlert.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                        Toast t = Toast.makeText(ClientAppointmentDetails.this, "התווספה התראה לתור! ", Toast.LENGTH_SHORT);
-                        t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
-                        t.show();
                         Intent intent = new Intent(ClientAppointmentDetails.this, NotificationPublisher.class);
                         intent.putExtra("boName",boName);
                         intent.putExtra("startTime", aptStart);
                         PendingIntent pendingIntent = PendingIntent.getBroadcast(ClientAppointmentDetails.this, 1 , intent ,0);
                         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                        int utcStart = Integer.parseInt(aptStart);
-                      //  String fulldate = aptDate+" "+startT+":00:00";
-                        String fulldate = "23/12/2020"+" "+"19:41:00";
+                        String fulldate = aptDate+" "+aptStart+":00:00";
                         DateTimeFormatter formatter = null;
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH);
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+                        {
+
+                        formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss") ;
                         LocalDateTime localDate = LocalDateTime.parse(fulldate, formatter);
+                        localDate = localDate.minusDays(1);
                         long timeInMilliseconds = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli();
-                        System.out.println("timeInMilliseconds    " + timeInMilliseconds);
                         alarmManager.set(AlarmManager.RTC_WAKEUP,timeInMilliseconds,pendingIntent);
-                    }
+                        Toast t = Toast.makeText(ClientAppointmentDetails.this, "התווספה התראה לתור! ", Toast.LENGTH_SHORT);
+                        t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
+                        t.show();
+                        }else
+                        {
+                            Toast t = Toast.makeText(ClientAppointmentDetails.this, "לא ניתן להוסיך התראה לתור זה ", Toast.LENGTH_SHORT);
+                            t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
+                            t.show();
+                        }
                 }
             });
     }
