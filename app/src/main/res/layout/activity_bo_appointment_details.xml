@@ -51,30 +51,16 @@
     <TextView
         android:layout_width="85dp"
         android:layout_height="29dp"
-        android:text="שם עסק : "
+        android:text="שם הלקוח : "
         android:textColor="@color/black"
-        android:textStyle="bold"
         android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.907"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.396" />
-
-    <TextView
-        android:layout_width="85dp"
-        android:layout_height="29dp"
-        android:text="כתובת : "
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.907"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.515" />
 
     <TextView
         android:layout_width="85dp"
@@ -88,10 +74,10 @@
         app:layout_constraintHorizontal_bias="0.907"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintVertical_bias="0.515" />
+
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="תמונה לדוגמה : "
@@ -99,10 +85,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.902"
+        app:layout_constraintHorizontal_bias="0.912"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.775" />
+        app:layout_constraintVertical_bias="0.629" />
 
     <TextView
         android:id="@+id/date"
@@ -138,7 +124,7 @@
         app:layout_constraintVertical_bias="0.285" />
 
     <TextView
-        android:id="@+id/businessName"
+        android:id="@+id/clientName"
         android:layout_width="220dp"
         android:layout_height="30dp"
         android:text=""
@@ -154,7 +140,7 @@
         app:layout_constraintVertical_bias="0.398" />
 
     <TextView
-        android:id="@+id/businessAddress"
+        android:id="@+id/clientPhoneNumber"
         android:layout_width="220dp"
         android:layout_height="30dp"
         android:text=""
@@ -169,32 +155,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.516" />
 
-    <TextView
-        android:id="@+id/businessPhoneNumber"
-        android:layout_width="220dp"
-        android:layout_height="30dp"
-        android:gravity="right"
-        android:text=""
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.651" />
-
     <ImageView
-        android:id="@+id/nailExample"
+        android:id="@+id/nailExmpl"
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.371"
+        app:layout_constraintHorizontal_bias="0.398"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95"
+        app:layout_constraintVertical_bias="0.771"
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
     <TextView
@@ -208,7 +178,7 @@
         app:layout_constraintHorizontal_bias="0.903"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.836" />
+        app:layout_constraintVertical_bias="0.696" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
