@@ -144,7 +144,9 @@ public class ClientAppointmentDetails extends AppCompatActivity {
                     formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
                     LocalDateTime localDate = LocalDateTime.parse(fulldate, formatter);
                     localDate = localDate.minusDays(1);
-                    long timeInMilliseconds = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli();
+                    long timeInMilliseconds = localDate
+                            .atZone(ZoneId.systemDefault())
+                            .toInstant().toEpochMilli();
                     alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
                     Toast t = Toast.makeText(ClientAppointmentDetails.this, "התווספה התראה לתור! ", Toast.LENGTH_SHORT);
                     t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
