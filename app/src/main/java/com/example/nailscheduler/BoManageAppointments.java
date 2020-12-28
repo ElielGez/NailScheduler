@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -55,6 +56,18 @@ public class BoManageAppointments extends AppCompatActivity {
                         }
                         appointmentAdapter = new AppointmentAdapter(BoManageAppointments.this, 0, 0, appointmentsL);
                         listView.setAdapter(appointmentAdapter);
+                        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                            @Override
+                            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                                String aptKey = appointmentsL.get(position).getKey();
+                                Intent i = new Intent(BoManageAppointments.this, BoAppointmentDetails.class);
+                                i.putExtra("appointmentKey", aptKey);
+                                startActivity(i);
+                                return true;
+
+                            }
+                        });
                     }
 
                     @Override
