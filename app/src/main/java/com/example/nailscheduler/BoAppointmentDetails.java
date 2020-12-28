@@ -60,7 +60,7 @@ public class BoAppointmentDetails extends AppCompatActivity {
                 second();
             }
 
-            private void second() {
+           private void second() {
                 mRefBo = FirebaseDatabase.getInstance().getReference().getRoot().child("Clients").child(currentCL);
                 mRefBo.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -77,7 +77,7 @@ public class BoAppointmentDetails extends AppCompatActivity {
 
                     }
                 });
-            }
+           }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
