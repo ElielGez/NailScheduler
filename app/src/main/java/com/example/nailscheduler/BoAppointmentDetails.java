@@ -17,13 +17,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageException;
 import com.squareup.picasso.Picasso;
 
 public class BoAppointmentDetails extends AppCompatActivity {
 
     String currentCL;
     String aptKey;
-    public DatabaseReference mRefApt, mRefBo ;
+    public DatabaseReference mRefApt, mRefBo;
     String aptDate, aptStart, aptEnd, clName, clNumber, nailImage;
     private TextView dateTxtView, timeTxtView, clNameTxtView, clPhoneTxtView;
     private ImageView nailExImgView;
@@ -50,17 +51,12 @@ public class BoAppointmentDetails extends AppCompatActivity {
                 aptDate = dataSnapshot.child("date").getValue().toString();
                 aptStart = dataSnapshot.child("startTime").getValue().toString();
                 aptEnd = dataSnapshot.child("endTime").getValue().toString();
-                Task<Uri> downloadUri = FirebaseStorageManage.getAppointmentImage(aptKey, FirebaseStorageManage.APT_IMAGE_EXAMPLE);
-                if (downloadUri.isComplete()) {
-                    nailImage = downloadUri.getResult().toString();
-                    Picasso.get().load(nailImage).into(nailExImgView);
-                }
                 dateTxtView.setText(aptDate);
                 timeTxtView.setText(aptStart + ":00" + " - " + aptEnd + ":00");
                 second();
             }
 
-           private void second() {
+            private void second() {
                 mRefBo = FirebaseDatabase.getInstance().getReference().getRoot().child("Clients").child(currentCL);
                 mRefBo.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -77,7 +73,7 @@ public class BoAppointmentDetails extends AppCompatActivity {
 
                     }
                 });
-           }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -86,10 +82,10 @@ public class BoAppointmentDetails extends AppCompatActivity {
         });
 
         FirebaseStorageManage.getAppointmentImage(aptKey, FirebaseStorageManage.APT_IMAGE_EXAMPLE).
-                addOnCompleteListener(new OnCompleteListener<Uri>(){
+                addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(Task<Uri> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             Uri uri = task.getResult();
                             Picasso.get().load(uri).into(nailExImgView);
                         }
