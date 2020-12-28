@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nailscheduler">
+    <!-- Adding camera, and write external storage permission -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -9,8 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NailScheduler">
-        <activity android:name=".NewAppointment"></activity>
-        <activity android:name=".ClientAppointmentDetails"></activity>
+        <activity android:name=".BoAppointmentDetails"></activity>
+        <activity android:name=".NewAppointment" />
+        <activity android:name=".ClientAppointmentDetails" />
         <activity android:name=".ClientManageApts" />
         <activity android:name=".ProfileClient" />
         <activity android:name=".ProfileBusiness" />
@@ -27,6 +35,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
