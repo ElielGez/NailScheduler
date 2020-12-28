@@ -3,9 +3,13 @@ package com.example.nailscheduler.services;
 import android.net.Uri;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
 
 public class FirebaseStorageManage {
     private static StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -19,6 +23,7 @@ public class FirebaseStorageManage {
         StorageReference ref = mStorageRef.child(path);
         return ref.putFile(uri);
     }
+
     private static Task<Uri> getFile(String path) {
         StorageReference ref = mStorageRef.child(path);
         return ref.getDownloadUrl();
@@ -32,11 +37,11 @@ public class FirebaseStorageManage {
         return uploadFile(USERS_PATH + userId + "/" + IMAGES_PATH + fileName, uri);
     }
 
-    public static Task<Uri> getAppointmentImage(String aptId,String fileName){
+    public static Task<Uri> getAppointmentImage(String aptId, String fileName) {
         return getFile(APPOINTMENTS_PATH + aptId + "/" + IMAGES_PATH + fileName);
     }
 
-    public static Task<Uri> getUserImage(String userId,String fileName){
+    public static Task<Uri> getUserImage(String userId, String fileName) {
         return getFile(USERS_PATH + userId + "/" + IMAGES_PATH + fileName);
     }
 

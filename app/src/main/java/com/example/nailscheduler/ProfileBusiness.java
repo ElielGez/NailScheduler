@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.StorageException;
 import com.squareup.picasso.Picasso;
 
 import android.provider.MediaStore;
@@ -37,6 +38,7 @@ import java.io.File;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
 import android.net.Uri;
 
 public class ProfileBusiness extends AppCompatActivity {
@@ -48,7 +50,7 @@ public class ProfileBusiness extends AppCompatActivity {
     FirebaseAuth fAuth;
     private TextView nameTxtView, emailTxtView, phoneTxtView;
     private DatabaseReference userRef;
-    private String email,fname,phone, profileUrl, cUid;
+    private String email, fname, phone, profileUrl, cUid;
     private Button manage_apt;
     private String currentPhotoPath;
 
@@ -61,7 +63,7 @@ public class ProfileBusiness extends AppCompatActivity {
         nameTxtView = findViewById(R.id.tv_name);
         phoneTxtView = findViewById(R.id.tv_phone);
         emailTxtView = findViewById(R.id.tv_email);
-        manage_apt =findViewById(R.id.manage_appointments);
+        manage_apt = findViewById(R.id.manage_appointments);
         profileImage = (CircleImageView) findViewById(R.id.profile_image);
 
         fAuth = FirebaseAuth.getInstance();
@@ -77,11 +79,6 @@ public class ProfileBusiness extends AppCompatActivity {
                 fname = dataSnapshot.child("fullName").getValue().toString();
                 email = dataSnapshot.child("email").getValue().toString();
                 phone = dataSnapshot.child("phoneNumber").getValue().toString();
-                Task<Uri> downloadUri = FirebaseStorageManage.getUserImage(cUid, FirebaseStorageManage.USER_IMAGE_PROFILE);
-                if(downloadUri.isComplete()){
-                    profileUrl = downloadUri.getResult().toString();
-                    Picasso.get().load(profileUrl).into(profileImage);
-                }
                 nameTxtView.setText(fname);
                 emailTxtView.setText(email);
                 phoneTxtView.setText(phone);
@@ -95,10 +92,10 @@ public class ProfileBusiness extends AppCompatActivity {
         });
 
         FirebaseStorageManage.getUserImage(cUid, FirebaseStorageManage.USER_IMAGE_PROFILE).
-                addOnCompleteListener(new OnCompleteListener<Uri>(){
+                addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(Task<Uri> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             Uri uri = task.getResult();
                             Picasso.get().load(uri).into(profileImage);
                         }
@@ -123,20 +120,19 @@ public class ProfileBusiness extends AppCompatActivity {
 
     private void askCameraPermission() {
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
-        }
-        else{
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+        } else {
             dispatchTakePictureIntent();
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == CAMERA_PERM_CODE){
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == CAMERA_PERM_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 dispatchTakePictureIntent();
-            }else{
+            } else {
                 Toast.makeText(this, "Camera Permission is Required to use camera", Toast.LENGTH_SHORT).show();
             }
 
@@ -149,7 +145,7 @@ public class ProfileBusiness extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 File f = (new File(currentPhotoPath));
-                imageUri= Uri.fromFile(f);
+                imageUri = Uri.fromFile(f);
                 profileImage.setImageURI(imageUri);
                 if (imageUri != null) {
                     FirebaseStorageManage.uploadUserImage(cUid, FirebaseStorageManage.USER_IMAGE_PROFILE, imageUri);

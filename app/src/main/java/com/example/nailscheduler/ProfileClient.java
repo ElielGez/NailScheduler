@@ -35,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
@@ -102,10 +103,10 @@ public class ProfileClient extends AppCompatActivity {
         });
 
         FirebaseStorageManage.getUserImage(cUid, FirebaseStorageManage.USER_IMAGE_PROFILE).
-                addOnCompleteListener(new OnCompleteListener<Uri>(){
+                addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(Task<Uri> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             Uri uri = task.getResult();
                             Picasso.get().load(uri).into(profileImage);
                         }
