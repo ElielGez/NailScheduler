@@ -139,7 +139,7 @@ public class ClientAppointmentDetails extends AppCompatActivity {
                         intent.putExtra("startTime", aptStart);
                         PendingIntent pendingIntent = PendingIntent.getBroadcast(ClientAppointmentDetails.this, 1 , intent ,0);
                         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                        String fulldate = aptDate+" "+aptStart+":00:00";
+                         String fulldate = aptDate+" "+aptStart+":00:00";
                         DateTimeFormatter formatter = null;
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
                         {
@@ -147,8 +147,10 @@ public class ClientAppointmentDetails extends AppCompatActivity {
                         formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss") ;
                         LocalDateTime localDate = LocalDateTime.parse(fulldate, formatter);
                         localDate = localDate.minusDays(1);
-                        long timeInMilliseconds = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli();
-                        alarmManager.set(AlarmManager.RTC_WAKEUP,timeInMilliseconds,pendingIntent);
+                            long timeInMilliseconds = localDate
+                                    .atZone(ZoneId.systemDefault())
+                                    .toInstant().toEpochMilli();
+                            alarmManager.set(AlarmManager.RTC_WAKEUP,timeInMilliseconds,pendingIntent);
                         Toast t = Toast.makeText(ClientAppointmentDetails.this, "התווספה התראה לתור! ", Toast.LENGTH_SHORT);
                         t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
                         t.show();
