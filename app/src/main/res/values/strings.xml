@@ -29,6 +29,7 @@
     <string name="endTime">שעת סיום</string>
     <string name="search">חפש</string>
     <string name="create_apt">הזמן תור</string>
+    <string name="add_reminder">לחץ להוספת התראה 24 שעות לפני התור</string>
 
 
 </resources>

@@ -1,6 +1,8 @@
 package com.example.nailscheduler;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -55,12 +57,11 @@ public class ProfileClient extends AppCompatActivity {
     FirebaseAuth fAuth;
     private TextView nameTxtView, emailTxtView, phoneTxtView;
     private DatabaseReference userRef;
-    private StorageReference storageRef;
     private String email,fname,phone, cUid;
     private Button manageAppointment, scheduleAppointment;
     private String currentPhotoPath, downloadedUriUrl;
 
-
+    public static final String NOTIFICATION_CHANNEL_ID = "CHANNEL" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,6 @@ public class ProfileClient extends AppCompatActivity {
         FirebaseUser currentUser = fAuth.getCurrentUser();
         cUid = currentUser.getUid();
         userRef = FirebaseDatabase.getInstance().getReference().child("Clients").child(cUid);
-        storageRef = FirebaseStorage.getInstance().getReference();
 
         // Read from the database
         userRef.addValueEventListener(new ValueEventListener() {
@@ -134,6 +134,7 @@ public class ProfileClient extends AppCompatActivity {
                 askCameraPermission();
             }
         });
+        createNotificationChannel();
     }
 
     private void askCameraPermission() {
@@ -218,5 +219,19 @@ public class ProfileClient extends AppCompatActivity {
         fAuth.signOut();
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         finish();
+    }
+
+        private void createNotificationChannel()
+    {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            CharSequence name = "NailScheduler - Channel";
+            String description = "Notification channel for NailScheduler";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager nm= getSystemService(NotificationManager.class);
+            nm.createNotificationChannel(channel);
+        }
     }
 }

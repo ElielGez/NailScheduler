@@ -1,11 +1,20 @@
 package com.example.nailscheduler;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nailscheduler.models.CityJSON;
 import com.example.nailscheduler.services.CitiesAdapter;
+import com.example.nailscheduler.services.NotificationPublisher;
 import com.example.nailscheduler.services.FirebaseStorageManage;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,7 +33,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class ClientAppointmentDetails extends AppCompatActivity {
 
@@ -36,6 +57,8 @@ public class ClientAppointmentDetails extends AppCompatActivity {
     private ImageView nailExImgView;
     private Uri imageUri;
 
+    private int startT;
+    private Button addAlert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +68,7 @@ public class ClientAppointmentDetails extends AppCompatActivity {
         boNameTxtView = findViewById(R.id.businessName);
         boPhoneTxtView = findViewById(R.id.businessPhoneNumber);
         boAddressTxtView = findViewById(R.id.businessAddress);
+        addAlert = findViewById((R.id.addReminder));
         nailExImgView = findViewById(R.id.nailExample);
 
         Intent intent = getIntent();
@@ -104,6 +128,36 @@ public class ClientAppointmentDetails extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
+
+        addAlert.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        Intent intent = new Intent(ClientAppointmentDetails.this, NotificationPublisher.class);
+                        intent.putExtra("boName",boName);
+                        intent.putExtra("startTime", aptStart);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(ClientAppointmentDetails.this, 1 , intent ,0);
+                        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                        String fulldate = aptDate+" "+aptStart+":00:00";
+                        DateTimeFormatter formatter = null;
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+                        {
+
+                        formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss") ;
+                        LocalDateTime localDate = LocalDateTime.parse(fulldate, formatter);
+                        localDate = localDate.minusDays(1);
+                        long timeInMilliseconds = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli();
+                        alarmManager.set(AlarmManager.RTC_WAKEUP,timeInMilliseconds,pendingIntent);
+                        Toast t = Toast.makeText(ClientAppointmentDetails.this, "התווספה התראה לתור! ", Toast.LENGTH_SHORT);
+                        t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
+                        t.show();
+                        }else
+                        {
+                            Toast t = Toast.makeText(ClientAppointmentDetails.this, "לא ניתן להוסיך התראה לתור זה ", Toast.LENGTH_SHORT);
+                            t.setGravity(Gravity.CENTER_VERTICAL, 0, 700);
+                            t.show();
+                        }
                 }
             });
     }

@@ -49,7 +49,8 @@ public class ClientManageApts extends AppCompatActivity {
             //POPUP - Appointment Cancellation Explanation
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(" ");
-            builder.setMessage("ניתן לבטל תור בעל סטטוס ״התור מאושר״ עד 24 שעות לפני מועד התור");
+            builder.setMessage("על מנת לצפות בפרטי התור יש ללחוץ לחיצה ארוכה על התור הספציפי. " +"\n"+
+                    "ניתן לבטל תור בעל סטטוס ״התור מאושר״ עד 24 שעות לפני מועד התור.");
             builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
